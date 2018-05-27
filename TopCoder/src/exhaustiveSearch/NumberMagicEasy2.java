@@ -16,6 +16,24 @@ public class NumberMagicEasy2 {
 		}
 		return 0;
 	}
+	
+	public int theNumber2(String answer) {
+		String[] c = {
+				"YYYYYYYYNNNNNNNN",
+				"YYYYNNNNYYYYNNNN",
+				"YYNNYYNNYYNNYYNN",
+				"YNYNYNYNYNYNYNYN"
+		};
+		
+		for(int i=0; i < 15; i++) {
+			String temp = "";
+			for(int j=0; j < 4; j++) {
+				temp += c[j].charAt(i);
+				if(answer.equals(temp)) return i+1;
+			}
+		}
+		return 0;
+	}
 
 	char Check(int[] X, int number){
 		for(int x : X) {
