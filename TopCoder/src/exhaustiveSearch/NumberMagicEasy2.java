@@ -41,4 +41,33 @@ public class NumberMagicEasy2 {
 		}
 		return 'N';
 	}
+	
+	public int theNumber3(String answer) {
+		//카드에 있는 각각의 값에 대해 YN을 정해주고 시작
+		String[] c = {
+				"YYYY",
+				"YYYN",
+				"YYNY",
+				"YYNN",
+				"YNYY",
+				"YNYN",
+				"YNNY",
+				"YNNN",
+				"NYYY",
+				"NYYN",
+				"NYNY",
+				"NYNN",
+				"NNYY",
+				"NNYN",
+				"NNNY",
+				"NNNN"
+		};
+		
+		for(int i=0; i <= 15; i++) {
+			if(answer.equals(c[i])) {
+				return i+1;
+			}
+		}
+		return 0;
+	}
 }
