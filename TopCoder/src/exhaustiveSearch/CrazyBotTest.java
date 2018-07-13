@@ -10,7 +10,7 @@ public class CrazyBotTest {
 		
 		System.out.println("--------------------------------");
 		
-		CrazyBot3 botTest = new CrazyBot3(14, 50, 0, 50, 0);
+		CrazyBot3 botTest = new CrazyBot3(14, 25, 25, 25, 25);
 		System.out.println(botTest.getAnswer());
 	}
 }

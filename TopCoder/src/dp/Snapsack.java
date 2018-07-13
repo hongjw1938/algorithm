@@ -6,9 +6,12 @@ public class Snapsack {
 	int[] valueSnap = {2, 3, 2, 3, 6};
 
 	int[][] dp = new int[6][11];
+	
 	public static void main(String[] args) {
 		Snapsack ans = new Snapsack();
 		System.out.println(ans.getValue(0, 0));
+		
+		
 		
 	}
 	
@@ -20,7 +23,7 @@ public class Snapsack {
 			for(int j=0; j < 10; j++) {
 				
 				if(j + weightSnap[i] > 10) continue;
-				//¹«°Ô¸¦ ´õÇÏ¿© ÃøÁ¤
+				//ï¿½ï¿½ï¿½Ô¸ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 				dp[i+1][j + weightSnap[i]] = Math.max(dp[i][j] + valueSnap[i], dp[i+1][j + weightSnap[i]]);
 				ret = Math.max(dp[i+1][j + weightSnap[i]], ret);
 			}
