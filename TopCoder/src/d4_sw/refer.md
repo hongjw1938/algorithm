@@ -1,0 +1,10 @@
+- Scanner
+	- scanner의 경우 close를 제대로 해주지 않으면 끝나지 않는 듯.
+	- scanner의 경우 string을 읽고 싶다면 next(); 를 사용
+- BufferedReader, BufferedWriter
+	- 사용 권장
+- StringBuffer
+	- 만약 substring을 해서 비교를 하고 싶다면 비교 대상도 반드시 toString으로 String형으로 변경 할 것.
+- 주의
+	- 자료구조를 static이나 instance로 선언하였다면 테스트 케이스를 실행할 때마다 누적된다는 것을 기억해야한다.
+	- 반드시 테스트케이스마다 초기화할 것.
