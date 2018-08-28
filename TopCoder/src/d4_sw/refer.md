@@ -8,3 +8,7 @@
 - 주의
 	- 자료구조를 static이나 instance로 선언하였다면 테스트 케이스를 실행할 때마다 누적된다는 것을 기억해야한다.
 	- 반드시 테스트케이스마다 초기화할 것.
+- 입력값을 읽는 방법
+	- Scanner 혹은 BufferedReader를 통해 읽어낸다.
+	- 필요한 부분을 잘라내고 반복문을 취하고 싶은 경우, String으로 전체 Line을 읽어낸 다음 split시킬 수 있다. == String.split(" ");
+	- 혹은 StringTokenizer를 이용하여 token별로 값을 넣어서 사용할 수 있다.
