@@ -12,3 +12,5 @@
 	- Scanner 혹은 BufferedReader를 통해 읽어낸다.
 	- 필요한 부분을 잘라내고 반복문을 취하고 싶은 경우, String으로 전체 Line을 읽어낸 다음 split시킬 수 있다. == String.split(" ");
 	- 혹은 StringTokenizer를 이용하여 token별로 값을 넣어서 사용할 수 있다.
+- string split : .으로는  split이 안되는듯??
+- Comparator사용하여 ArrayList 정렬 : Q4_0829.java참조
