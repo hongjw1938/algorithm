@@ -14,3 +14,4 @@
 	- 혹은 StringTokenizer를 이용하여 token별로 값을 넣어서 사용할 수 있다.
 - string split : .으로는  split이 안되는듯??
 - Comparator사용하여 ArrayList 정렬 : Q4_0829.java참조
+- 값이 null인지 확인할 때는 equals가 아니라 == 으로 비교한다.
