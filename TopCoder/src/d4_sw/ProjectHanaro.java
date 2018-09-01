@@ -10,8 +10,13 @@ public class ProjectHanaro {
 	private static int[][] island;
 	private static double[][] distance;
 	private static double TAX_RATE;
-	
+	private static boolean[] visited;
+
 	public static void main(String[] args) {
+		// 각각의 섬들과의 거리를 전부 구해서 저장한다.
+		// 0번 섬부터 시작해 가장 가까운 거리에 있는 섬과 연결한다. 연결된 경우 visited를 true로 바꾼다.
+		// 만약 마지막에 연결 되지 않은 섬이 있다면 그 섬과 가장 가까운 섬을 연결한다.
+		
 		Scanner scan = new Scanner(System.in);
 		int case_num = scan.nextInt();
 		for(int i=1; i <= case_num; i++) {
@@ -19,7 +24,7 @@ public class ProjectHanaro {
 			
 			island = new int[islands][2];
 			distance = new double[islands][islands];
-			
+			visited = new boolean[islands];
 			for(int j=0; j < 2; j++) {
 				for(int k=0; k < islands; k++) {
 					island[k][j] = scan.nextInt();
@@ -35,43 +40,44 @@ public class ProjectHanaro {
 					}
 				}
 			}
+			
 //			for(int j=0; j < islands; j++) {
 //				System.out.print("distance : ");
 //				for(int k=0; k < islands; k++) {
 //					System.out.print(distance[j][k] + " ");
-//					
 //				}
 //				System.out.println();
 //			}
-//			System.out.println("TAX : " + TAX_RATE);
-		
-			Queue<Double> q = new LinkedList<>();
-			for(int j=0; j < distance.length; j++) {
-				if(distance[0][j] == 0.0) continue;
-				q.add(distance[0][j]);
-			}
 			
-			int current = 0;
-			while(current != islands) {
-				for(int k=0; k < islands; k++) {
-					if(current == k) continue;
-					double val = q.poll();
-					if(distance[current][k] >= val) {
-						q.add(val);
-					} else {
-						q.add(distance[current][k]);
-					}
+			Queue<Integer> q = new LinkedList<>();
+			q.add(0);
+			visited[0] = true;
+			
+			List<Double> list = null;
+			Queue<Double> subq = null;
+			while(!q.isEmpty()) {
+				list = new ArrayList<>();
+				subq = new LinkedList<>();
+				
+				int from = q.poll();
+				for(int j=0; j < islands; j++) {
+					subq.add(distance[from][j]);
 				}
-				current++;
+				
+				int t = 0;
+				for(int f=0; f < islands; f++) {
+					if(distance[f][t] == 0.0) continue;
+					if(f==t) {
+						t++;
+						f = 0;
+					}
+					distance[f][t]
+				}
 			}
 			
-			int length = q.size();
-			double result = 0;
-			for(int j=0; j < length; j++) {
-				result += TAX_RATE * q.poll();
-			}
-			System.out.printf("#%d", i);
-			System.out.printf(" %d%n", Math.round(result));
+//			System.out.printf("#%d", i);
+//			System.out.printf(" %d%n", Math.round(TAX_RATE * result));
+			
 		}
 		scan.close();
 	}
