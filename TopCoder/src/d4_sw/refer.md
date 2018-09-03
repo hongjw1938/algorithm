@@ -23,3 +23,9 @@
 	- 따라서, A가 비어있지 않다면 B는 전부 clear 시켜야 한다.
 	- 만약 A가 비어있다면, 현재 시점 연락자들이 전부 B에 들어있을 것이다.
 	- B에 있는 인원 중 가장 번호가 큰 사람을 반환한다.
+- 우선순위 큐(PriorityQueue)
+	- 일반적으로 Queue라는 자료구조는 '선입선출'(First-In, First-Out)의 대기열 규칙(queuing discipline)을 가지고 있다. 말그대로 먼저들어온 놈이 먼저 나간다는 것이다.하지만 JAVA에서 제공하는 'PriorityQueue'는 우선순위를 결정하여 들어온 순서와 상관없이 그 우선순위가 높은 엘리먼트가 나가게 된다.
+	- Comparator 인터페이스를 구현하여 어떻게 offer할지 지정한다.
+	- 만약 기존에 만들어놓은 queue에서 순서만 바꿔 새로 넣고 싶다면 Collections.reversedOrder를 사용한다.
+	
+	
