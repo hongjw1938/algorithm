@@ -7,6 +7,7 @@ public class LinkedList {
 	private Node tail;
 	private int size = 0;
 	
+	// 노드 객체 class
 	private class Node{
 		
 		// 각각의 노드가 저장할 변수
@@ -197,12 +198,88 @@ public class LinkedList {
 		return index;
 	}
 	
+	// iterator 객체 반환
+	public ListIterator listIterator() {
+		return new ListIterator();
+	}
+	
+	// iterator inner class
+	class ListIterator {
+		private Node next;
+		private Node lastReturned;
+		private int nextIndex;
+		
+		ListIterator(){
+			next = head;
+		}
+		
+		// next값
+		public Object next() {
+			// 현재의 next에 저장된 Node 반환
+			lastReturned = next;
+			
+			// 반환하였으니, 다음 위치로 pointer이동
+			next = next.next;
+			
+			nextIndex++;
+			
+			return lastReturned.data;
+		}
+		
+		// 다음 값이 있는가?
+		public boolean hasNext() {
+			return nextIndex < size();
+		}
+		
+		// iterator로 중간에 값을 넣는 경우
+		public void add(Object input) {
+			// 노드 생성
+			Node newNode = new Node(input);
+			
+			// 처음에 추가하는 경우
+			if(lastReturned == null) {
+				head = newNode;	
+			} else {
+				// 중간에 추가하는 경우
+				// 방금 반환했던 Node의 next를  새로만든 Node로 지정
+				lastReturned.next = newNode;	
+			}
+			
+			// 새로운 노드의 다음 노드는 next
+			newNode.next = next;
+			
+			// 마지막에 추가한 경우
+			if(next == null) {
+				tail = newNode;
+			}
+			
+			// lastReturned를 새로 추가된 노드로 추가.
+			lastReturned = newNode;
+			nextIndex++;
+			size++;
+		}
+		
+		// lastReturned가 가리키는 Node를 삭제하고 싶다.
+		public void remove() {
+			// next를 한번도 호출하지 않았다면
+			if(nextIndex == 0) {
+				throw new IllegalStateException();
+			}
+			
+			// next가 아닌 이전 값을 삭제해야 한다.
+			// 그러나 for문을 돌아서 삭제할 것을 찾기 때문에 매우 비효율적..
+			LinkedList.this.remove(nextIndex-1);
+			nextIndex--;
+		}
+	}
+	
 	public static void main(String[] args) {
 		LinkedList numbers = new LinkedList();
 		numbers.addFirst(30);
 		numbers.addLast(20);
 		
-
+		LinkedList.ListIterator i = numbers.listIterator();
+		i.add(5);
 	}
 
 }
