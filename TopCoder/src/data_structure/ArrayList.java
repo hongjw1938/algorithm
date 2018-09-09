@@ -160,7 +160,7 @@ public class ArrayList {
 		array_list.addLast(40);
 		array_list.addLast(50);
 		
-		ArrayList.ListIterator li = numbers.listIterator();
+		ArrayList.ListIterator li = array_list.listIterator();
 	}
 	
 	
