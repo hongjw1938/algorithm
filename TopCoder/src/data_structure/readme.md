@@ -1,0 +1,50 @@
+# 양방향 연결 리스트
+- 기존의 단방향 연결 리스트를 기반으로 만들어진다.
+- 이전 노드에 대한 정보를 저장한 변수가 필요하다.
+- add
+	- k-1에 해당하는 노드를 찾아서 temp1에 저장
+	- k에 해당하는 노드는 temp1.next이므로 temp2에 저장
+	- 새로운 노드가 추가된 경우, temp1의 next로 새로운 노드를 지정한다.
+	- 새로 추가한 노드의 next를 temp2로 지정한다.
+	- 만약 temp2가 존재한다면(null이 아니라면) temp2.prev 즉, 이전노드를 새로 추가한 노드로 추가한다.
+		- 새로운 노드의 prev를 temp1으로 저장한다.
+- Node 메소드
+	- 기존 LinkedList에서는 next를 이용해 단방향으로 Node를 찾았다.
+	- 이제는 prev가 추가되었으므로 양방향으로 찾을 수 있어야 한다.
+	- 특정 Node를 찾을 때는 어느 방향으로부터 찾는지에 따라 더 빠르게 찾을 수도 있다.
+	- size를 이용해 데이터가 head 또는 tail 중 어디가 더 빠른지 알아야한다.
+	- 찾고자 하는 index가 전체 크기 size를 2로 나눈 값보다 작다면, 크다면
+	- 작다면 : head에서 찾는다.
+	- 크다면 : tail에서 찾는다.
+- remove 메소드
+	- 첫 노드를 삭제시에는 삭제 후 head의 다음 노드가 null이 아니었다면 해당 노드의 prev를 null로 지정한다.
+	- remove의 경우 삭제할 데이터의 위치를 찾아낸 다음, 해당 데이터를 삭제하기 전에 지정한다.
+	- k-1번째 index의 노드를 temp에 지정하고 해당 노드의 next를 해당 노드의 next.next로 지정한다.
+	- 해당 다음 노드의 prev로 temp를 지정한다.(물론, 만약 해당 다음 노드가 null이 아니어야 한다.)
+- Iterator
+	- previous
+		- 만약 마지막까지 다 반환한 경우 next는 null일 것이다.
+		- 따라서, 이 경우 lastReturned와 next를 tail로 지정한다.
+		- 아니라면 next.prev로 두 변수를 지정한다.
+		- index를 줄이고 data를 반환한다.
+	- hasPrevious()
+		- 가장 첫번째까지 리턴했다면 더이상 리턴할 노드가 남아있지 않다.
+		- 이 때, nextIndex의 값은 0이다.
+		- 만약 0보다 크다면 previous가 가능하다는 의미이다.
+	- add
+		- 만약 한 번도 next가 호출되지 않았다면, lastReturned는 null이며, next에는 head가 저장되어 있을 것이다.
+		- 새로 노드를 추가했을 때, 해당 노드의 prev는 lastReturned가 되어야 한다.
+		- 새로 노드를 추가했을 때, 해당 노드의 다음 노드의 prev는 새로운 노드로 지정되어야 한다.
+		- 만약 새로운 노드의 다음 노드가 null이면 새로운 노드가 tail이 되어야 한다.
+	- remove 메소드
+		- 가장 최근에 반환된 노드에 next, prev로 각 노드가 이미 저장되어 있으므로 node메소드로 처음부터 인덱스로 찾을 필요가 없다.
+		- 따라서, n과 p에 lastReturned에 저장된 next, prev를 저장한다.
+		- 만약 첫 노드를 삭제하고자 한다면 head를 n으로 바꾸고, prev는 null로 지정하며, lastReturned도 null로 지정한다.
+		- 만약 아니라면 p의 next는 next로 지정한다.
+		- lastReturned의 prev는 null이 된다.
+		- 만약, n == null이라면 즉, 마지막 노드를 삭제하고자 한다는 것이 된다.
+		- 그러므로 tail을 p로 바꿔주고, tail의 next를 null로 지정한다.
+		- 아니라면 n의 prev는 p가 된다.
+		- 만약 next가 null이면 이미 마지막까지 순환한 것을 의미하낟.
+		- 따라서 이 경우 lastReturned는 tail이 된다.
+		- 아니라면 lastReturned는 next.prev가 된다.
