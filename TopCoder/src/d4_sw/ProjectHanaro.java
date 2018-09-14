@@ -1,84 +1,70 @@
 package d4_sw;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class ProjectHanaro {
-	private static int[][] island;
-	private static double[][] distance;
-	private static double TAX_RATE;
-	private static boolean[] visited;
-
+	static class Island{
+		int x;
+		int y;
+		long len;
+	}
+	
+	private static int N;
+	private static boolean[] visit;
+	private static Island[] island;
+	
 	public static void main(String[] args) {
-		// 각각의 섬들과의 거리를 전부 구해서 저장한다.
-		// 0번 섬부터 시작해 가장 가까운 거리에 있는 섬과 연결한다. 연결된 경우 visited를 true로 바꾼다.
-		// 만약 마지막에 연결 되지 않은 섬이 있다면 그 섬과 가장 가까운 섬을 연결한다.
-		
+
 		Scanner scan = new Scanner(System.in);
-		int case_num = scan.nextInt();
-		for(int i=1; i <= case_num; i++) {
-			int islands = scan.nextInt();
-			
-			island = new int[islands][2];
-			distance = new double[islands][islands];
-			visited = new boolean[islands];
-			for(int j=0; j < 2; j++) {
-				for(int k=0; k < islands; k++) {
-					island[k][j] = scan.nextInt();
-				}
-			}
-			TAX_RATE = scan.nextDouble();
-			
-			for(int j=0; j < islands; j++) {
-				for(int k=0; k < islands; k++) {
-					if(j==k) continue;
-					else {
-						distance[j][k] = Math.pow((island[j][0] - island[k][0]), 2) + Math.pow((island[j][1] - island[k][1]), 2);
-					}
-				}
+		int case_n = scan.nextInt();
+		
+		for(int test=1; test <= case_n; test++) {
+			N = scan.nextInt();
+			island = new Island[N];
+			visit = new boolean[N];
+			for(int i=0; i < N; i++) {
+				island[i] = new Island();
+				island[i].x = scan.nextInt();
 			}
 			
-//			for(int j=0; j < islands; j++) {
-//				System.out.print("distance : ");
-//				for(int k=0; k < islands; k++) {
-//					System.out.print(distance[j][k] + " ");
-//				}
-//				System.out.println();
-//			}
-			
-			Queue<Integer> q = new LinkedList<>();
-			q.add(0);
-			visited[0] = true;
-			
-			List<Double> list = null;
-			Queue<Double> subq = null;
-			while(!q.isEmpty()) {
-				list = new ArrayList<>();
-				subq = new LinkedList<>();
-				
-				int from = q.poll();
-				for(int j=0; j < islands; j++) {
-					subq.add(distance[from][j]);
-				}
-				
-				int t = 0;
-				for(int f=0; f < islands; f++) {
-					if(distance[f][t] == 0.0) continue;
-					if(f==t) {
-						t++;
-						f = 0;
-					}
-					distance[f][t]
-				}
+			for(int i=0; i< N; i++) {
+				island[i].y = scan.nextInt();
+				island[i].len = Long.MAX_VALUE;
 			}
 			
-//			System.out.printf("#%d", i);
-//			System.out.printf(" %d%n", Math.round(TAX_RATE * result));
+			double tax_rate = scan.nextDouble();
 			
+			long result = 0;
+			result = getMinimum(result);
+			System.out.println("#" + test + " " + Math.round(tax_rate * result));
 		}
+		
 		scan.close();
+	}
+	
+	private static long getMinimum(long result) {
+		island[0].len = 0;
+		for(int i=0; i < N; i++) {
+			long cost = Long.MAX_VALUE;
+			int index = 0;
+			for(int j=0; j < N; j++) {
+				if(!visit[j] && island[j].len < cost) {
+					cost = island[j].len;
+					index = j;
+				}
+			}
+			visit[index] = true;
+			result += island[index].len;
+			
+			for(int j=0; j < N; j++) {
+				if(!visit[j]) {
+					cost = (long) Math.pow(island[index].x - island[j].x, 2) + (long) Math.pow(island[index].y - island[j].y, 2);
+                    if (island[j].len > cost) {
+                        island[j].len = cost;
+                    }
+				}
+			}
+		}
+		return result;
 	}
 }
