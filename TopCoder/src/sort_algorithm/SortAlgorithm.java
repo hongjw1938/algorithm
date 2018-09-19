@@ -1,7 +1,7 @@
 package sort_algorithm;
 
 public class SortAlgorithm {
-
+	public static int[] sorted = new int[] { 9, 3, 8, 2, 1, 6, 5, 4, 7, 0 };
 	public static void main(String[] args) {
 		int[] numbers = new int[] { 9, 3, 8, 2, 1, 6, 5, 4, 7, 0 };
 //		selectionSort(numbers);
@@ -83,6 +83,39 @@ public class SortAlgorithm {
 				aux--;
 			}
 			input[aux+1] = tmp;
+		}
+	}
+	
+	// 병합정렬
+	// 시간복잡도 : O(nlogn)
+	public static void mergeSort(int[] input, int m, int n) {
+		int middle;
+		
+		if(m < n) {
+			middle = (m + n) / 2;
+			mergeSort(input, m, middle);
+			mergeSort(input, middle+1, n);
+			merge(input, m, middle, n);
+		}
+	}
+	
+	public static void merge(int[] input, int m, int middle, int n) {
+		int i, j, k, t;
+		
+		i = m;
+		j = middle + 1;
+		k = m;
+		
+		while(i <= middle && j <= n) {
+			if(input[i] <= input[j])
+				sorted[k] = input[i++];
+			else
+				sorted[k] = input[j++];
+			k++;
+		}
+		
+		for(t = m; t <= n; t++) {
+			input[t] = sorted[t];
 		}
 	}
 
