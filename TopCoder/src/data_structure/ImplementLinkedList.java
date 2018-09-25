@@ -1,6 +1,5 @@
 package data_structure;
 
-import java.sql.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 

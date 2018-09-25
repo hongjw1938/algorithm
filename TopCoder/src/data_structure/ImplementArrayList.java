@@ -116,6 +116,10 @@ public class ImplementArrayList<T> {
 		return -1;
 	}
 	
+	public boolean isEmpty() {
+		return size == 0;
+	}
+	
 	public void sort(Comparator<? super T> c) {
 		Arrays.sort((T[]) array, 0, size, c);
 	}
