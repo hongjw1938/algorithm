@@ -1,0 +1,37 @@
+### ArrayList ADT
+- 생성자 : 16크기의 배열을 생성
+	- capacity 인자를 전달하여 특정 크기의 배열 생성 가능
+- boolean add(Object obj, int index)
+	- 리스트에 데이터를 저장.
+- boolean add(Object obj)
+	- 리스트의 마지막에 자동으로 추가
+- boolean addFirst, addLast(Object obj)
+	- 리스트의 첫 번째 혹은 마지막에 데이터를 저장
+- Object remove(int index)
+	- 리스트의 특정 위치의 데이터를 삭제하고 반환
+- Object removeFirst(), removeLast()
+	- 첫 혹은 마지막 데이터 삭제
+- Object get(int index)
+	- 특정 데이터 반환
+- int sizeOf()
+	- list의 데이터 개수 반환
+- int indexOf(Object obj)
+	- 특정 데이터의 배열 위치 반환. 없으면 -1 반환
+	
+### LinkedList ADT
+- 생성자 : 단순 인스턴스 생성
+- boolean add(Object data)
+	- 리스트에 데이터를 저장한다. 매개변수 data에 전달된 값을 저장
+- boolean add(Object data, int index)
+	- 리스트에 데이터 저장. index변수에 전달된 위치에 data를 저장함
+- node(int index)
+	- 리스트에서 특정 노드를 반환
+- remove(int index)
+	- 특정 위치의 노드를 삭제
+- sizeOf()
+	- 리스트의 크기 반환
+- get(int index)
+	- 특정 노드의 데이터를 반환
+- indexOf(Object data)
+	- 특정 data가 몇 번째 노드에 있는지 확인
+-
