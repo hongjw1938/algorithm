@@ -6,7 +6,9 @@ public class SortAlgorithm {
 		int[] numbers = new int[] { 9, 3, 8, 2, 1, 6, 5, 4, 7, 0 };
 //		selectionSort(numbers);
 //		bubbleSort(numbers);
-		insertionSort(numbers);
+//		insertionSort(numbers);
+//		mergeSort(numbers, 0, 9);
+		quickSort(numbers, 0, 9);
 		for(int i=0; i < numbers.length; i++) {
 			if(i == 0) System.out.print("[");
 			if(i == numbers.length-1) {
@@ -99,14 +101,14 @@ public class SortAlgorithm {
 		}
 	}
 	
-	public static void merge(int[] input, int m, int middle, int n) {
+	public static void merge(int[] input, int left, int middle, int right) {
 		int i, j, k, t;
 		
-		i = m;
+		i = left;
 		j = middle + 1;
-		k = m;
+		k = left;
 		
-		while(i <= middle && j <= n) {
+		while(i <= middle && j <= right) {
 			if(input[i] <= input[j])
 				sorted[k] = input[i++];
 			else
@@ -114,8 +116,56 @@ public class SortAlgorithm {
 			k++;
 		}
 		
-		for(t = m; t <= n; t++) {
+		if(i > middle) {
+			for(t=j; t <= right; t++) {
+				sorted[k++] = input[t];
+			}
+		} else {
+			for(t=i; t <= middle; t++) {
+				sorted[k++] = input[t];
+			}
+		}
+		for(t = left; t <= right; t++) {
 			input[t] = sorted[t];
+		}
+	}
+	
+	// 퀵정렬
+	// 시간복잡도 : (nlog2n)
+	public static void swap(int[] arr, int idx1, int idx2) {
+		int temp = arr[idx1];
+		arr[idx1] = arr[idx2];
+		arr[idx2] = temp;
+	}
+	
+	public static int partition(int[] arr, int left, int right) {
+		int pivot = arr[left];
+		int low = left+1;
+		int high = right;
+		
+		while(low <= high) {
+			while(low <= right && pivot >= arr[low]) {
+				low++;
+			}
+			
+			while(high >= (left+1) && pivot <= arr[high]) {
+				high--;
+			}
+			
+			if(low <= high) {
+				swap(arr, low, high);
+			}
+		}
+		
+		swap(arr, left, high);
+		return high;
+	}
+	
+	public static void quickSort(int arr[], int left, int right) {
+		if(left <= right) {
+			int pivot = partition(arr, left, right);
+			quickSort(arr, left, pivot-1);
+			quickSort(arr, pivot+1, right);
 		}
 	}
 
