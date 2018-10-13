@@ -1,7 +1,7 @@
 package data_structure;
 
 //ArrayList의 본질적인 구현
-public class ArrayList {
+public class ArrayListImpl {
 	
 	//Object타입의 배열을 생성. 최대 element 100개
 	private Object[] elementData = new Object[100];
@@ -139,28 +139,28 @@ public class ArrayList {
 		//iterator를 이용해 값을 추가하고 제거하는 method
 		public void add(Object element) {
 			//상위 클래스의 메소드와 충돌나지 않게 하도록. 확실히 표현
-			ArrayList.this.add(nextIndex++, element);
+			ArrayListImpl.this.add(nextIndex++, element);
 		}
 		
 		//remove는 현재의 element를 삭제하는 것이다.
 		//next를 한번도 호출하지 않은 상태에서 remove를 호출하는 것은 
 		//아직 존재하지 않는 상태에서 실행하는 것이므로 next를 무조건 1회 이상 불러야하낟.
 		public void remove() {
-			ArrayList.this.remove(nextIndex-1);
+			ArrayListImpl.this.remove(nextIndex-1);
 			nextIndex--;
 		}
 	}
 	
 	//main method. Test용 
 	public static void main(String[] args) {
-		ArrayList array_list = new ArrayList();
+		ArrayListImpl array_list = new ArrayListImpl();
 		array_list.addLast(10);
 		array_list.addLast(20);
 		array_list.addLast(30);
 		array_list.addLast(40);
 		array_list.addLast(50);
 		
-		ArrayList.ListIterator li = array_list.listIterator();
+		ArrayListImpl.ListIterator li = array_list.listIterator();
 	}
 	
 	
